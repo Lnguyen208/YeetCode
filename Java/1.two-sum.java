@@ -9,7 +9,7 @@ import java.util.HashMap;
 // @lc code=start
 class Solution {
     public int[] twoSum(int[] nums, int target) {
-        // brute force appraoch
+        // brute force approach
         // nested for loops to check every combination
         // O(n^2) time O(k) space
         // sort + binary search approach
