@@ -15,7 +15,7 @@ class Solution {
         // sort + binary search approach
         // sort array, iterate over every position
         // use binary search to find operand
-        // O(nlog(n) + nlog(n)) time O(k) space
+        // O(nlog(n) + nlog(n)) -> O(nlog(n)) time O(k) space
         // hashmap approach
         // iterate over nums, construct hashmap of (absolute difference, index)
         // check hashmap at every iteration for matching pair
