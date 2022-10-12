@@ -7,7 +7,8 @@
 // @lc code=start
 class Solution {
     public int lengthOfLastWord(String s) {
-    // Brute Force Approach:
+    // Brute Force Approach: 
+    // Not using Java premade String methods except length() and charAt()
     // Two seperate loops--
     // - First determines first letter preceding unknown number of spaces
     // - Second carries on from position of first loop
