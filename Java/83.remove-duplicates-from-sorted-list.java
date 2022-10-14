@@ -27,13 +27,11 @@ class Solution {
         if (currentNode == null) return head;
         while (currentNode.next != null) {
             ListNode delNode = currentNode.next;
- //           System.out.println(currentNode.val);
             if (currentNode.val == delNode.val) {
                 currentNode.next = delNode.next;
                 delNode.next = null;
             }
             else currentNode = currentNode.next;
-//            System.out.println(currentNode.val);
         }
         return head;
     }
