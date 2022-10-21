@@ -29,19 +29,26 @@ class Solution {
         // Add to list from bottom to root
         // Repeat with right branch (minus root)
         // O(n) time, n is tree height O(n) space
-    
+        // DFS Stack Iterative Approach:
+        // Pushes all left nodes into a stack, pops when moving back 
+        // tree to previous level, check right branch if not null
+        // transverses right and repeat left branch first,
+        // then pop when done
+        // O(n) time, n is tree height O(n) space
+        
         ArrayList<Integer> result = new ArrayList<Integer>();
+        Stack<TreeNode> temp = new Stack<TreeNode>();
+        TreeNode node = root;
 
-        helper(result, root);
+        while (node != null || !temp.isEmpty()) {
+            while (node != null) {
+                temp.push(node);
+                node = node.left;
+            }
+            result.add(temp.peek().val);
+            node = temp.pop().right;
+        }
         return result;
-    }
-
-    static void helper(ArrayList<Integer> result, TreeNode node) {
-        if (node == null) return;
-
-        helper(result, node.left);
-        result.add(node.val);
-        helper(result, node.right);
     }
 }
 // @lc code=end
