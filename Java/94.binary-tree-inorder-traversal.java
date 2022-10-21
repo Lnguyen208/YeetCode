@@ -24,12 +24,12 @@ import java.util.*;
 
 class Solution {
     public List<Integer> inorderTraversal(TreeNode root) {
-        // DFS Stack Recursive Approach:
+        // DFS List Recursive Approach:
         // Transverse left branch to leaves, return when null
         // Add to list from bottom to root
         // Repeat with right branch (minus root)
         // O(n) time, n is tree height O(n) space
-        
+    
         ArrayList<Integer> result = new ArrayList<Integer>();
 
         helper(result, root);
