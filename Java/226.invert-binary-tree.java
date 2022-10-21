@@ -25,7 +25,8 @@ class Solution {
         // Recursive Approach:
         // Base case: tree node is null
         // Swap left and right nodes
-        
+        // O(2^n) time, n is tree height; O(n) space (call stack)
+
         if (root == null) return null;
         
         TreeNode temp = root.left;
