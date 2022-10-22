@@ -29,38 +29,34 @@ class Solution {
         // right branch traverses to max depth for right first
         // Check for mismatches
         // O(n) time, where n is height of tree O(n) space
-        // Recursive Approach: (TODO)
+        // Recursive Approach:
+        // Each tree and subtree must have mirrored left and right 
+        // branches to the other side, so have two temps that
+        // hold the same relative current position and
+        // check if each other's left and right branches are 
+        // mirrors
+        // Base: left and right branches are null
+        // recursion: left and right branch mirror
+        // O(n) time, n is height of tree, O(n) call stack
 
-        Stack<TreeNode> stack = new Stack<TreeNode>();
-        TreeNode branchLeft = root;
-        TreeNode branchRight = root;
-
-        while ((branchLeft != null || branchRight != null) || !stack.isEmpty()) {
-            while (branchLeft != null && branchRight != null) {
-                stack.push(branchLeft);
-                stack.push(branchRight);
-                branchLeft = branchLeft.left;
-                branchRight = branchRight.right;
-            }
-
-            if ((branchLeft == null && branchRight != null) || 
-                (branchRight == null && branchLeft != null)) {
-                    return false;
-            }
-
-            TreeNode nodeR = stack.pop();
-            TreeNode nodeL = stack.pop();
-
-            if (nodeR.val != nodeL.val) {
-                return false;
-            }
-
-            else {
-                branchLeft = nodeL.right;
-                branchRight = nodeR.left;
-            }
+        return helper(root, root);
+    }
+    
+    static boolean helper(TreeNode nodeL, TreeNode nodeR) {
+        if (nodeL == null && nodeR == null) {
+            return true;
         }
-        return true;
+        // at least one node is not null at this point
+        // recursion on next left on left and next right on right
+        // and next right on left and next left on right
+        // (lateral aspect of tree matches, medial aspects match)
+        if (nodeL != null && nodeR != null && 
+                nodeL.val == nodeR.val) {
+            return (helper(nodeL.left, nodeR.right) && 
+                        helper(nodeL.right, nodeR.left));
+        }
+        // true iff all conditions are met to be mirrors, else
+        return false;
     }
 }
 // @lc code=end
