@@ -18,33 +18,23 @@
 class Solution {
     public ListNode removeElements(ListNode head, int val) {
         // Iterative Approach:
+        // Create dummy head
         // Iterate every element of linked list
-        // compare with k, remove if matches
-        // check head for match at end
+        // compare next with k, skip to next next if matches
         // O(n) time, O(k) space
-        // ToDo: implement sliding window approach for deletion?
 
-        ListNode curr = head;
+        ListNode dummyHead = new ListNode(val - 1);
+        dummyHead.next = head;
+        head = dummyHead;
 
-        while (curr != null && curr.next != null) {
-            ListNode next = curr.next;
-            if (next.val == val) {
-                ListNode temp = next.next;
-                next.next = null;
-                curr.next = temp;
-                next = temp;
+        while (head.next != null) {
+            if (head.next.val == val) {
+                head.next = head.next.next;
             } else {
-                curr = next;
-                next = next.next;
+                head = head.next;
             }
         }
-
-        if (head != null && head.val == val) {
-            ListNode temp = head.next;
-            head.next = null;
-            head = temp;
-        }
-        return head;
+        return dummyHead.next;
     }
 }
 // @lc code=end
