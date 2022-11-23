@@ -23,35 +23,61 @@
 import java.util.*;
 
 class Solution {
-
-    ArrayList<String> result = new ArrayList<String>();
-
     public List<String> binaryTreePaths(TreeNode root) {
         // DFS Inorder Recursive Approach:
         // reaching leaf does not add arrow & also adds str to list
         // not leaf, add value & arrow. check left and right for next branch
         // O(?) time, not sure but greater than n
         // O(# of paths * # of intermediate paths) space. Strings are immutable
-        
+        // DFS Preorder Iterative Approach:
+        // Traverse tree to leaf with stack, track parent node as value of child in HashMap
+        // When a leaf is reached, pass leaf and HashMap to helper to create String for list
+        //      - push leaf into stack
+        //      - find leaf's parent in HashMap
+        //      - push parent and repeat for parent until null value
+        //      - pop stack and append to StringBuffer, add result to list
+        // O(nlog(n)) time, O(n) space
+
+        ArrayList<String> result = new ArrayList<String>();
         if (root == null) return result;
-        dfs(root, "");
+        Stack<TreeNode> stck = new Stack<TreeNode>();
+        stck.push(root);
+        HashMap<TreeNode, TreeNode> parent = new HashMap<TreeNode, TreeNode>();
+        parent.put(root, null);
+
+        while(!stck.isEmpty()) {
+            TreeNode curr = stck.pop();
+            if (curr.left == null && curr.right == null) {
+                helper(curr, parent, result);
+            }
+
+            if (curr.right != null) {
+                parent.put(curr.right, curr);
+                stck.push(curr.right);
+            }
+
+            if (curr.left != null) {
+                parent.put(curr.left, curr);
+                stck.push(curr.left);
+            }
+        }
         return result;
     }
-    void dfs(TreeNode curr, String str) {
-        if (curr.left == null && curr.right == null) {
-            result.add(str + curr.val);
-            return;
+
+    static void helper(TreeNode current, HashMap<TreeNode, TreeNode> map, ArrayList<String> list) {
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+        StringBuffer str = new StringBuffer();
+        while (current != null) {
+            stack.push(current);
+            current = map.get(current);
         }
-        if (curr.left == null) {
-            dfs(curr.right, "" + str + curr.val + "->");
-            return;
+
+        while (!stack.isEmpty()) {
+            current = stack.pop();
+            str.append(current.val + "->");
         }
-        if (curr.right == null) {
-            dfs(curr.left, "" + str + curr.val + "->");
-            return;
-        }
-        dfs(curr.left, "" + str + curr.val + "->");
-        dfs(curr.right, "" + str + curr.val + "->");
+        str.delete(str.length()-2, str.length()); // remove last arrow
+        list.add(str.toString());
     }
 }
 // @lc code=end
