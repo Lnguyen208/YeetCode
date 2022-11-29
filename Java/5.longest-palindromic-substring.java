@@ -7,7 +7,7 @@
 // @lc code=start
 class Solution {
     public String longestPalindrome(String s) {
-    // Dynamic Programming--Two Pointer Approach
+    // Expand Around the Center Approach:
     // Iterate String. Use current index as mid point and check
     // characters laterally from midpoint until not equal
     // choose max length, track the max's left and right indices
