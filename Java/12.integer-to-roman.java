@@ -13,6 +13,8 @@ class Solution {
         // Creat a HashMap dictionary to track number of modulo done,
         // actual modulo value, and Character
         // Modulo input integer and match with appropriate Character(s)
+        // O(n) time, n is the number of digits in num
+        // O(n) space
         HashMap<Integer, HashMap<Integer, Character>> dict = new HashMap<Integer, HashMap<Integer, Character>>();
         dict.put(0, new HashMap<Integer, Character>());
         dict.get(0).put(1, 'I');
