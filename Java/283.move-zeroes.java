@@ -7,22 +7,30 @@
 // @lc code=start
 class Solution {
     public void moveZeroes(int[] nums) {
-        // Bubble Sort Approach: (in place)
-        // Start at end, mark destination swap position, 
-        // check array values moving towards front
-        // if 0 found, swap consecutive indice pairs until
-        // destination is reached, decrement destination swap position
-        // O(n^2) time, O(1) space
-        int swapP = nums.length - 1;
-        for (int i = swapP; i >= 0; i--) {
-            if (nums[i] == 0) {
-                for(int j = i; j < swapP; j++) {
-                    int temp = nums[j + 1];
-                    nums[j + 1] = nums[j];
-                    nums[j] = temp;
-                }
-                swapP--;
+        // Two-Pointer Approach:
+        // Set p1 to scout for zeroes
+        // Set p2 to be the paste destination
+        // If not zero, paste value at p2 to be value at p1 and increment both
+        // If zero, increment p1 only
+        // when p1 reaches end, let all values at p2 and after become 0
+        // O(n) time, O(1) space
+        int p1 = 0;
+        int p2 = 0;
+
+        while (p1 < nums.length) {
+            if (nums[p1] == 0) {
+                p1++;
             }
+            else {
+                nums[p2] = nums[p1];
+                p1++;
+                p2++;
+            }
+        }
+        
+        while (p2 < nums.length) {
+            nums[p2] = 0;
+            p2++;
         }
     }
 }
