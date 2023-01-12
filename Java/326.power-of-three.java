@@ -18,13 +18,12 @@ class Solution {
         // Use math class log function
         // O(Unknown) time, Blackbox implementations;
         // O(1) space
-        if (n < 1)
-            return false;
-
-        while (n % 3 == 0) {
-            n /= 3;
-        }
-        return n == 1;
+        // Limitations of Integers Approach:
+        // Use the highest possible value a signed integer can represent
+        // and calculate the maximum exponent that can exist for base 3
+        // Use modulus to determine if n is a factor of the 3^max exponent
+        // O(1) time, O(1) space
+        return (n > 0) && (1162261467 % n == 0);
     }
 }
 // @lc code=end
